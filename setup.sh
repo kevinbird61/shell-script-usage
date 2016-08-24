@@ -50,15 +50,47 @@ match_deb=''
 if [[ $usystem == *"i686"* || $usystem == *"i386"* ]]; then
 	wget https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_2015.10.28_i386.deb
 	match_deb='dropbox_2015.10.28_i386.deb'
+	usystem='i386'
 elif [[ $usystem == *"x86_64"* ]]; then
 	wget https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_2015.10.28_amd64.deb
 	match_deb='dropbox_2015.10.28_amd64.deb'
+	usystem='x86_64'
 fi
 
 sudo apt-get install python-gtk2 
 sudo dpkg -i ${match_deb}
 dropbox start
 dropbox start -i
+
+# Installation of Qt
+read -p "[Qt Installation request]What kind of Qt you want to install?(Server/User)" mode
+if [[ $mode == "Server" ]];then
+	# Step 1 : Installing the License File (Ignore first)
+	# Step 2 : Unpacking the Archive
+	mkdir Qt-Install && cd Qt-Install
+	wget http://download.qt.io/official_releases/qt/5.7/5.7.0/single/qt-everywhere-opensource-src-5.7.0.tar.gz
+	gunzip qt-everywhere-opensource-src-5.7.0.tar.gz
+	tar xvf qt-everywhere-opensource-src-5.7.0.tar
+	# Step 3 : Building the Library
+	cd qt-everywhere-opensource-src-5.7.0
+	sudo apt-get install screen
+	screen ./configure && make && make install
+	# Step 4 : Set the environment variables
+	PATH=/usr/local/Qt-5.7.0/bin:$PATH
+	export PATH
+elif [[ $mode == "User" ]];then
+	if [[ $usystem == "i386" ]];then
+		wget http://download.qt.io/official_releases/online_installers/qt-unified-linux-x86-online.run
+		chmod +x qt-unified-linux-x86-online.run
+		./qt-unified-linux-x86-online.run
+	else
+		wget http://download.qt.io/official_releases/online_installers/qt-unified-linux-x64-online.run
+		chmod +x qt-unified-linux-x64-online.run
+		./qt-unified-linux-x64-online.run
+	fi
+else
+	echo "Wrong input , ignore Qt installation!"
+fi
 
 # update
 sudo apt-get update
