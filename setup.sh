@@ -53,6 +53,7 @@ if [[ $usystem == *"i686"* || $usystem == *"i386"* ]]; then
 elif [[ $usystem == *"x86_64"* ]]; then
 	wget https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_2015.10.28_amd64.deb
 	match_deb='dropbox_2015.10.28_amd64.deb'
+fi
 
 sudo apt-get install python-gtk2 
 sudo dpkg -i ${match_deb}
