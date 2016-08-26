@@ -92,7 +92,24 @@ else
 	echo "Wrong input , ignore Qt installation!"
 fi
 
+# Install WPS as document manager
+if [[ $usystem == "i386" ]]; then
+	echo "[WPS installation] Install 32-bits version of WPS"
+	wget http://kdl.cc.ksosoft.com/wps-community/download/a21/wps-office_10.1.0.5672~a21_i386.deb
+	sudo dpkg -i wps-office_10.1.0.5672~a21_i386.deb
+else 
+	echo "[WPS installation] Install 64-bits version of WPS"
+	wget http://kdl.cc.ksosoft.com/wps-community/download/a21/wps-office_10.1.0.5672~a21_amd64.deb
+	sudo dpkg -i wps-office_10.1.0.5672~a21_amd64.deb
+fi
+
 # update
 sudo apt-get update
 
-
+# Asking user install LAMP or not
+read -p "Do you want to install LAMP on this computer?(Y/N)" lamp_ans
+if [[ $lamp_ans == "Y" || $lamp_ans == "y" ]]; then
+	sudo apt-get install lamp-server^
+else
+	echo "Ok , Just ignore this step!"
+fi
