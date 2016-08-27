@@ -57,6 +57,14 @@ elif [[ $usystem == *"x86_64"* ]]; then
 	usystem='x86_64'
 fi
 
+# Find out the match name with that debian file
+for entry in `ls`; do 
+	if [[ $entry == *$match_deb* ]]; then
+		match_deb = $entry
+		break
+	fi
+done
+
 sudo apt-get install python-gtk2 
 sudo dpkg -i ${match_deb}
 dropbox start
