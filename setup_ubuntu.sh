@@ -4,7 +4,7 @@
 sudo apt-get install build-essential
 
 # installation 
-sudo apt-get install vim git 
+sudo apt-get install vim git dia shutter
 
 
 # get ready for vimrc and bashrc
