@@ -32,29 +32,17 @@ sudo apt-get install chromium-browser
 # Download and Installation for dropbox
 # First , we need to test the PC environment
 usystem=$(uname -a)
-match_deb=''
 if [[ $usystem == *"i686"* || $usystem == *"i386"* ]]; then
 	wget https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_2015.10.28_i386.deb
-	match_deb='dropbox_2015.10.28_i386.deb'
+	cd ~ && wget -O - "https://www.dropbox.com/download?plat=lnx.x86" | tar xzf -
 	usystem='i386'
 elif [[ $usystem == *"x86_64"* ]]; then
-	wget https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_2015.10.28_amd64.deb
-	match_deb='dropbox_2015.10.28_amd64.deb'
+	cd ~ && wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf -
 	usystem='x86_64'
 fi
 
-# Find out the match name with that debian file
-for entry in `ls`; do 
-	if [[ $entry == *$match_deb* ]]; then
-		match_deb = $entry
-		break
-	fi
-done
-
-sudo apt-get install python-gtk2 
-sudo dpkg -i ${match_deb}
-dropbox start
-dropbox start -i
+# Enable daemon
+~/.dropbox-dist/dropboxd
 
 # Installation of Qt
 read -p "[Qt Installation request]What kind of Qt you want to install?(Server/User/No)" mode
