@@ -12,5 +12,7 @@ Summarize the shell script that I have been used.
   - `qt_install.sh` : installation for qt.
   - `restart-audio.sh` : restart the pc sound device(use when your pc's sound device has some trouble)
   - `powerline_install.sh` : install powerline for your terminal usage.
-  ![alt text][pl.png]
-  [pl]:https://github.com/kevinbird61/shell-script-usage/blob/master/img/pl.png
+
+![alt text][pl]
+
+[pl]:https://github.com/kevinbird61/shell-script-usage/blob/master/img/pl.png
