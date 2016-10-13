@@ -1,5 +1,5 @@
 # Install basic install tools
-sudo apt-get install python-pip git
+yes | sudo apt-get install python-pip git
 
 # install the source
 pip install --user git+git://github.com/Lokaltog/powerline
