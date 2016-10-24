@@ -3,7 +3,7 @@
 # Usage  : CSNA class usage.
 auth=auth_usage
 res=result_usage
-
+LOC="/home/CSNA2016"
 # ========= change user to root ==#
 
 # Get the log file from /var/log
@@ -128,31 +128,31 @@ fi
 # Now we have backup and log file , so we need to summarize the log files , and remove all working directory gently
 # Starting writing into today's log 
 todaylog="$(date +'%Y%m%d' | awk '{print $1 ".log"}')"
-rm /home/CSNA2016/$todaylog
+rm ${LOC}/$todaylog
 # get today's weather
-echo "Hello there, this is kevin cyu's automatic mail , read it and be happy today!" >> /home/CSNA2016/$todaylog
+echo "Hello there, this is kevin cyu's automatic mail , read it and be happy today!" >> ${LOC}/$todaylog
+echo " " >> ${LOC}/$todaylog
+echo "[Today Weather News]" >> ${LOC}/$todaylog
+sh ${LOC}/get_weather.sh >> ${LOC}/$todaylog
+echo " " >> ${LOC}/$todaylog
+echo "[Accepted User]" >> ${LOC}/$todaylog
+cat ${res}/Accepted_user.log >> ${LOC}/$todaylog
+echo " " >> ${LOC}/$todaylog
+echo "[Invalid User]" >> ${LOC}/$todaylog
+cat ${res}/Invalid_user.log >> ${LOC}/$todaylog
+echo " " >> ${LOC}/$todaylog
+echo "[Error Logins]" >> ${LOC}/$todaylog
+cat ${res}/Error_user.log >> ${LOC}/$todaylog
 echo " " >> /home/CSNA2016/$todaylog
-echo "[Today Weather News]" >> /home/CSNA2016/$todaylog
-sh /home/CSNA2016/get_weather.sh >> /home/CSNA2016/$todaylog
-echo " " >> /home/CSNA2016/$todaylog
-echo "[Accepted User]" >> /home/CSNA2016/$todaylog
-cat ${res}/Accepted_user.log >> /home/CSNA2016/$todaylog
-echo " " >> /home/CSNA2016/$todaylog
-echo "[Invalid User]" >> /home/CSNA2016/$todaylog
-cat ${res}/Invalid_user.log >> /home/CSNA2016/$todaylog
-echo " " >> /home/CSNA2016/$todaylog
-echo "[Error Logins]" >> /home/CSNA2016/$todaylog
-cat ${res}/Error_user.log >> /home/CSNA2016/$todaylog
-echo " " >> /home/CSNA2016/$todaylog
-echo "[Hard Disk Usage]" >> /home/CSNA2016/$todaylog
-cat ${res}/hard_disk.log >> /home/CSNA2016/$todaylog
-echo " " >> /home/CSNA2016/$todaylog
-echo "[Difference of setuid programs]" >> /home/CSNA2016/$todaylog
-cat ${res}/Diff_setuid_program.log  >> /home/CSNA2016/$todaylog
-echo " " >> /home/CSNA2016/$todaylog
-echo "[My Crontab Content]" >> /home/CSNA2016/$todaylog
-cat /etc/crontab >> /home/CSNA2016/$todaylog
-echo " " >> /home/CSNA2016/$todaylog
+echo "[Hard Disk Usage]" >> ${LOC}/$todaylog
+cat ${res}/hard_disk.log >> ${LOC}/$todaylog
+echo " " >> ${LOC}/$todaylog
+echo "[Difference of setuid programs]" >> ${LOC}/$todaylog
+cat ${res}/Diff_setuid_program.log  >> ${LOC}/$todaylog
+echo " " >> ${LOC}/$todaylog
+echo "[My Crontab Content]" >> ${LOC}/$todaylog
+cat /etc/crontab >> ${LOC}/$todaylog
+echo " " >> ${LOC}/$todaylog
 
 # And wrapout all file in ${res} and ${auth}
 rm -r ${res} ${auth}

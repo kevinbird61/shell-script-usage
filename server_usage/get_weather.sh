@@ -96,6 +96,7 @@ WEATHER="$(cat format_weather.log | \
 		print $1" " $32"C~"$19"C " $55"% " "\""$6"\""
 	}
 	')"
+# Replace the delimiter "," to blank
 echo $WEATHER | awk '{gsub(","," ")} { print $0 }'
-# End the Log.
+# End the Log. , and then delete
 rm format_weather.log
